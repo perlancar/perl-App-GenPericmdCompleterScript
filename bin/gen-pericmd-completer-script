@@ -1,0 +1,40 @@
+#!perl
+
+# DATE
+# VERSION
+
+use 5.010;
+use strict;
+use warnings;
+
+use Perinci::CmdLine::Any;
+
+Perinci::CmdLine::Any->new(
+    url=>'/App/GenPericmdCompleterScript/gen_perinci_cmdline_completer_script',
+    log=>1,
+)->run;
+
+# ABSTRACT:
+# PODNAME:
+
+=head1 SYNOPSIS
+
+Create a Perinci::CmdLine completer script:
+
+ % gen-pericmd-completer-script /App/MyApp/myfunc > _mycli
+
+With subcommands:
+
+ % gen-pericmd-script /App/MyApp/ \
+     -s update:/App/MyApp/update -s delete:/App/MyApp/delete \
+     > mycli
+
+
+=head1 DESCRIPTION
+
+
+=head1 SEE ALSO
+
+L<Perinci::CmdLine::Manual>
+
+L<Dist::Zilla::Plugin::Rinci::ScriptFromFunc>
