@@ -26,8 +26,8 @@ sub _dump {
 
 sub _pa {
     state $pa = do {
-        require Perinci::Access;
-        my $pa = Perinci::Access->new;
+        require Perinci::Access::Lite;
+        my $pa = Perinci::Access::Lite->new;
         $pa;
     };
     $pa;
