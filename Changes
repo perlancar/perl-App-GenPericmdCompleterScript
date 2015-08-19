@@ -1,5 +1,10 @@
 Revision history for App-GenPericmdCompleterScript
 
+0.02    2015-08-19 (PERLANCAR)
+
+	- Pack the completer script so it only depends on core modules.
+
+
 0.01    2015-08-19 (PERLANCAR)
 
         - First release.
