@@ -399,20 +399,19 @@ sub gen_perinci_cmdline_completer_script {
         File::Slurper::write_text($tmp_unpacked_path, $code);
 
         my $res = App::depak::depak(
-            # tmp, while lcpan still indexes old periscomp
-            exclude_module  => ['JSON', 'JSON::Backend::PP','JSON::Boolean',
-                               'Data::Clean::FromJSON',
-                               'YAML::Old'],
-            exclude_pattern => ['^YAML::Old::.+'],
-            include_module  => ['JSON::PP'],
-
             include_prereq => [sort keys %used_modules],
             input_file     => $tmp_unpacked_path,
             output_file    => $tmp_packed_path,
             overwrite      => 1,
             trace_method   => 'none',
             pack_method    => 'datapack',
-            stripper       => 1,
+
+            stripper         => 1,
+            stripper_pod     => 1,
+            stripper_comment => 1,
+            stripper_ws      => 1,
+            stripper_maintain_linum => 0,
+            stripper_log     => 0,
         );
         return $res unless $res->[0] == 200;
 
