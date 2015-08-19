@@ -156,6 +156,14 @@ _
             schema => 'bool*',
             tags => ['category:pericmd-attribute'],
         },
+        read_config => {
+            schema => 'bool*',
+            tags => ['category:pericmd-attribute'],
+        },
+        read_env => {
+            schema => 'bool*',
+            tags => ['category:pericmd-attribute'],
+        },
         get_subcommand_from_arg => {
             schema => ['int*', in=>[0,1,2]],
             default => 1,
