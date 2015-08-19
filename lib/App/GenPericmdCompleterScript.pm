@@ -168,7 +168,8 @@ sub gen_perinci_cmdline_completer_script {
 
     my %args = @_;
 
-    my $output_file = $args{output_file};
+    # XXX schema
+    my $output_file = $args{output_file} // '-';
 
     my $subcommands;
     my $sc_metas = {};
