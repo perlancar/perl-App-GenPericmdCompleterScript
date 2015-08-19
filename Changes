@@ -1,5 +1,12 @@
 Revision history for App-GenPericmdCompleterScript
 
+0.03    2015-08-19 (PERLANCAR)
+
+	- Add arguments: read_config, read_env.
+
+	- Set default output_file when called as function.
+
+
 0.02    2015-08-19 (PERLANCAR)
 
 	- Pack the completer script so it only depends on core modules.
