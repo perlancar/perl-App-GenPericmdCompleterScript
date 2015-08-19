@@ -377,6 +377,39 @@ sub gen_perinci_cmdline_completer_script {
         $code = join "", @res;
     } # END GENERATE CODE
 
+    # pack the modules
+    my $packed_code;
+    {
+        require App::depak;
+        require File::Slurper;
+        require File::Temp;
+
+        my (undef, $tmp_unpacked_path) = File::Temp::tempfile();
+        my (undef, $tmp_packed_path)   = File::Temp::tempfile();
+
+        File::Slurper::write_text($tmp_unpacked_path, $code);
+
+        my $res = App::depak::depak(
+            # tmp, while lcpan still indexes old periscomp
+            exclude_module  => ['JSON', 'JSON::Backend::PP','JSON::Boolean',
+                               'Data::Clean::FromJSON',
+                               'YAML::Old'],
+            exclude_pattern => ['^YAML::Old::.+'],
+            include_module  => ['JSON::PP'],
+
+            include_prereq => [sort keys %used_modules],
+            input_file     => $tmp_unpacked_path,
+            output_file    => $tmp_packed_path,
+            overwrite      => 1,
+            trace_method   => 'none',
+            pack_method    => 'datapack',
+            stripper       => 1,
+        );
+        return $res unless $res->[0] == 200;
+
+        $packed_code = File::Slurper::read_text($tmp_packed_path);
+    }
+
     if ($output_file ne '-') {
         $log->trace("Outputing result to %s ...", $output_file);
         if ((-f $output_file) && !$args{overwrite}) {
@@ -385,7 +418,7 @@ sub gen_perinci_cmdline_completer_script {
         open my($fh), ">", $output_file
             or return [500, "Can't open '$output_file' for writing: $!"];
 
-        print $fh $code;
+        print $fh $packed_code;
         close $fh
             or return [500, "Can't write '$output_file': $!"];
 
@@ -396,11 +429,10 @@ sub gen_perinci_cmdline_completer_script {
         my $output_name = $output_file;
         $output_name =~ s!.+[\\/]!!;
 
-        $code = "";
+        $packed_code = "";
     }
 
-    [200, "OK", $code, {
-        'func.used_modules' => [sort keys %used_modules],
+    [200, "OK", $packed_code, {
     }];
 }
 
