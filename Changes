@@ -1,5 +1,11 @@
 Revision history for App-GenPericmdCompleterScript
 
+0.04    2015-08-19 (PERLANCAR)
+
+	- Remove temporary code, set defaults for stripping to make it work
+	  because defaults aren't yet called if we call via function.
+
+
 0.03    2015-08-19 (PERLANCAR)
 
 	- Add arguments: read_config, read_env.
