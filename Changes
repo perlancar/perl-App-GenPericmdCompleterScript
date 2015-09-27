@@ -1,5 +1,11 @@
 Revision history for App-GenPericmdCompleterScript
 
+0.05    2015-09-27 (PERLANCAR)
+
+	- Replace Data::Dumper with Data::Dmp 0.13 for more compatible
+	  dumping of coderefs.
+
+
 0.04    2015-08-19 (PERLANCAR)
 
 	- Remove temporary code, set defaults for stripping to make it work
