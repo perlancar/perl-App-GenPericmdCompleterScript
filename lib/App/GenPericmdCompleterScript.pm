@@ -15,15 +15,6 @@ our @EXPORT_OK = qw(gen_perinci_cmdline_completer_script);
 
 our %SPEC;
 
-sub _dump {
-    require Data::Dumper;
-    local $Data::Dumper::Deparse = 1;
-    local $Data::Dumper::Terse = 1;
-    my $res = Data::Dumper::Dumper($_[0]);
-    $res =~ s/\R\z//;
-    $res;
-}
-
 sub _pa {
     state $pa = do {
         require Perinci::Access::Lite;
@@ -286,13 +277,13 @@ sub gen_perinci_cmdline_completer_script {
                 (map {"require $_;\n"} @{$args{load_modules}}),
                 "\n") : ()),
 
-            'my $args = ', _dump(\%args), ";\n\n",
+            'my $args = ', dmp(\%args), ";\n\n",
 
-            'my $meta = ', _dump($meta), ";\n\n",
+            'my $meta = ', dmp($meta), ";\n\n",
 
-            'my $sc_metas = ', _dump($sc_metas), ";\n\n",
+            'my $sc_metas = ', dmp($sc_metas), ";\n\n",
 
-            'my $copts = ', _dump($cli->common_opts), ";\n\n",
+            'my $copts = ', dmp($cli->common_opts), ";\n\n",
 
             'my $r = {};', "\n\n",
 
