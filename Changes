@@ -1,5 +1,12 @@
 Revision history for App-GenPericmdCompleterScript
 
+0.06    2016-01-14 (PERLANCAR)
+
+	- [Bugfix] Typo causing load_module option to not take effect.
+
+	- Bump prereq version Log::Any::IfLOG to 0.07.
+
+
 0.05    2015-09-27 (PERLANCAR)
 
 	- Replace Data::Dumper with Data::Dmp 0.13 for more compatible
