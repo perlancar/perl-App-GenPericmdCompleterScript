@@ -274,7 +274,7 @@ sub gen_perinci_cmdline_completer_script {
 
             ($args{load_module} ? (
                 "# require extra modules\n",
-                (map {"require $_;\n"} @{$args{load_modules}}),
+                (map {"use $_ ();\n"} @{$args{load_module}}),
                 "\n") : ()),
 
             'my $args = ', dmp(\%args), ";\n\n",
