@@ -290,7 +290,7 @@ sub gen_perinci_cmdline_completer_script {
             "# get words\n",
             'my $shell;', "\n",
             'my ($words, $cword);', "\n",
-            'if ($ENV{COMP_LINE}) { $shell = "bash"; require Complete::Bash; ($words,$cword) = @{ Complete::Bash::parse_cmdline() }; }', "\n",
+            'if ($ENV{COMP_LINE}) { $shell = "bash"; require Complete::Bash; ($words,$cword) = @{ Complete::Bash::parse_cmdline() }; ($words,$cword) = @{ Complete::Bash::join_wordbreak_words($words,$cword) }; }', "\n",
             'elsif ($ENV{COMMAND_LINE}) { $shell = "tcsh"; require Complete::Tcsh; ($words,$cword) = @{ Complete::Tcsh::parse_cmdline() }; }', "\n",
             '@ARGV = @$words;', "\n",
             "\n",
