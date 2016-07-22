@@ -45,8 +45,7 @@ $SPEC{gen_perinci_cmdline_completer_script} = {
         },
         url => {
             summary => 'URL to function (or package, if you have subcommands)',
-            schema => 'str*',
-            'x.schema.entity' => 'riap_url',
+            schema => 'riap::url*',
             req => 1,
             pos => 1,
             tags => ['category:pericmd-attribute'],
