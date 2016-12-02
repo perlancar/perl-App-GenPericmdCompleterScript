@@ -1,5 +1,16 @@
 Revision history for App-GenPericmdCompleterScript
 
+0.09    2016-12-02 (PERLANCAR)
+
+	- Set Getopt::Long configuration gnu_compat to allow setting empty
+	  value '--name=' and no_getopt_compat to disallow '+name'.
+
+	- Tweak metadata: replace x.schema.entity with schema.
+
+	- Convert command-line arguments from octets to Unicode strings, to
+	  be able to complete e.g. Unicode filenames properly.
+
+
 0.08    2016-02-06 (PERLANCAR)
 
 	- Update to Complete::Bash 0.27.
