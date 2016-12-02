@@ -300,7 +300,7 @@ sub gen_perinci_cmdline_completer_script {
             "# parse common_opts which potentially sets subcommand\n",
             '{', "\n",
             "    require Getopt::Long;\n",
-            q(    my $old_go_conf = Getopt::Long::Configure('pass_through', 'no_ignore_case', 'bundling', 'no_auto_abbrev');), "\n",
+            q(    my $old_go_conf = Getopt::Long::Configure('pass_through', 'no_ignore_case', 'bundling', 'no_auto_abbrev', 'no_getopt_compat', 'gnu_compat');), "\n",
             q(    my @go_spec;), "\n",
             q(    for my $k (keys %$copts) { push @go_spec, $copts->{$k}{getopt} => sub { my ($go, $val) = @_; $copts->{$k}{handler}->($go, $val, $r); } }), "\n",
             q(    Getopt::Long::GetOptions(@go_spec);), "\n",
