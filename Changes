@@ -1,5 +1,3 @@
-Revision history for App-GenPericmdCompleterScript
-
 0.09    2016-12-02 (PERLANCAR)
 
 	- Set Getopt::Long configuration gnu_compat to allow setting empty
