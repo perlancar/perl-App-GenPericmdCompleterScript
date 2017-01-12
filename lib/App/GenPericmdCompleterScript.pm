@@ -11,7 +11,7 @@ use Log::Any::IfLOG '$log';
 use Data::Dmp;
 
 use Exporter qw(import);
-our @EXPORT_OK = qw(gen_perinci_cmdline_completer_script);
+our @EXPORT_OK = qw(gen_pericmd_completer_script);
 
 our %SPEC;
 
@@ -33,7 +33,7 @@ sub _riap_request {
     _pa()->request($action => $url, %{$extras // {}});
 }
 
-$SPEC{gen_perinci_cmdline_completer_script} = {
+$SPEC{gen_pericmd_completer_script} = {
     v => 1.1,
     summary => 'Generate Perinci::CmdLine completer script',
     args => {
@@ -161,7 +161,7 @@ _
         },
     },
 };
-sub gen_perinci_cmdline_completer_script {
+sub gen_pericmd_completer_script {
     require Perinci::CmdLine::Lite;
 
     my %args = @_;
@@ -221,7 +221,7 @@ sub gen_perinci_cmdline_completer_script {
     my $cli;
     {
         use experimental 'smartmatch';
-        my $spec = $SPEC{gen_perinci_cmdline_completer_script};
+        my $spec = $SPEC{gen_pericmd_completer_script};
         my @attr_args = grep {
             'category:pericmd-attribute' ~~ @{ $spec->{args}{$_}{tags} } }
             keys %{ $spec->{args} };
