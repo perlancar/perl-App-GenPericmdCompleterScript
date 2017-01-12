@@ -63,7 +63,7 @@ Example (on CLI):
     --subcommand "delete=/My/App/delete_item:Delete an item"
 
 _
-            schema => ['hash*', of=>'str*'],
+            schema => ['hash*', of=>['any*', of=>['hash*', 'str*']]],
             cmdline_aliases => { s=>{} },
             tags => ['category:pericmd-attribute'],
         },
@@ -174,7 +174,14 @@ sub gen_pericmd_completer_script {
     if ($args{subcommands}) {
         $subcommands = {};
         for my $sc_name (keys %{ $args{subcommands} }) {
-            my ($sc_url, $sc_summary) = split /:/, $_, 2;
+            my $v = $args{subcommands}{$sc_name};
+            my ($sc_url, $sc_summary);
+            if (ref($v) eq 'HASH') {
+                $sc_url = $v->{url};
+                $sc_summary = $v->{summary};
+            } else {
+                ($sc_url, $sc_summary) = split /:/, $v, 2;
+            }
             my $res = _riap_request(meta => $sc_url => {}, \%args);
             return [500, "Can't meta $sc_url: $res->[0] - $res->[1]"]
                 unless $res->[0] == 200;

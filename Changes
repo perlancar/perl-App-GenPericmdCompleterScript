@@ -1,3 +1,13 @@
+0.10    2017-01-12 (PERLANCAR)
+
+        [INCOMPATIBLE CHANGES]
+
+        - Rename function gen_perinci_cmdline_completer_script to
+          gen_pericmd_completer_script (standardize on the shorter name).
+
+        - Change 'subcommand' argument (array) to 'subcommands' (hash).
+
+
 0.09    2016-12-02 (PERLANCAR)
 
 	- Set Getopt::Long configuration gnu_compat to allow setting empty
