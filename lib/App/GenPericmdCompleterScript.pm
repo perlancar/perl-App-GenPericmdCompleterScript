@@ -50,20 +50,20 @@ $SPEC{gen_perinci_cmdline_completer_script} = {
             pos => 1,
             tags => ['category:pericmd-attribute'],
         },
-        subcommand => {
-            summary => 'Subcommand name followed by colon and function URL',
+        subcommands => {
+            summary => 'Hash of subcommand names and function URLs',
             description => <<'_',
 
 Optionally, it can be additionally followed by a summary, so:
 
-    NAME:URL[:SUMMARY]
+    URL[:SUMMARY]
 
 Example (on CLI):
 
-    --subcommand "delete:/My/App/delete_item:Delete an item"
+    --subcommand "delete=/My/App/delete_item:Delete an item"
 
 _
-            schema => ['array*', of=>'str*'],
+            schema => ['hash*', of=>'str*'],
             cmdline_aliases => { s=>{} },
             tags => ['category:pericmd-attribute'],
         },
@@ -171,10 +171,10 @@ sub gen_perinci_cmdline_completer_script {
 
     my $subcommands;
     my $sc_metas = {};
-    if ($args{subcommand} && @{ $args{subcommand} }) {
+    if ($args{subcommands}) {
         $subcommands = {};
-        for (@{ $args{subcommand} }) {
-            my ($sc_name, $sc_url, $sc_summary) = split /:/, $_, 3;
+        for my $sc_name (keys %{ $args{subcommands} }) {
+            my ($sc_url, $sc_summary) = split /:/, $_, 2;
             my $res = _riap_request(meta => $sc_url => {}, \%args);
             return [500, "Can't meta $sc_url: $res->[0] - $res->[1]"]
                 unless $res->[0] == 200;
