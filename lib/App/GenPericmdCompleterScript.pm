@@ -6,7 +6,7 @@ package App::GenPericmdCompleterScript;
 use 5.010001;
 use strict;
 use warnings;
-use Log::Any::IfLOG '$log';
+use Log::ger;
 
 use Data::Dmp;
 
@@ -416,7 +416,7 @@ sub gen_pericmd_completer_script {
     }
 
     if ($output_file ne '-') {
-        $log->trace("Outputing result to %s ...", $output_file);
+        log_trace("Outputing result to %s ...", $output_file);
         if ((-f $output_file) && !$args{overwrite}) {
             return [409, "Output file '$output_file' already exists (please use --overwrite if you want to override)"];
         }
@@ -428,7 +428,7 @@ sub gen_pericmd_completer_script {
             or return [500, "Can't write '$output_file': $!"];
 
         chmod 0755, $output_file or do {
-            $log->warn("Can't 'chmod 0755, $output_file': $!");
+            log_warn("Can't 'chmod 0755, $output_file': $!");
         };
 
         my $output_name = $output_file;
