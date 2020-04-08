@@ -1,3 +1,8 @@
+0.121   2020-04-08  Released-By: PERLANCAR
+
+	- [build] Rebuild, to update Sah coerce rule module names.
+
+
 0.120   2018-09-11  Released-By: PERLANCAR
 
 	- [incompatible change] Do not strip source code by default, to
