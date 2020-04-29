@@ -1,6 +1,8 @@
 package App::GenPericmdCompleterScript;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
@@ -107,11 +109,10 @@ _
         },
         output_file => {
             summary => 'Path to output file',
-            schema => ['str*'],
+            schema => ['filename*'],
             default => '-',
             cmdline_aliases => { o=>{} },
             tags => ['category:output'],
-            'x.schema.entity' => 'filename',
         },
         overwrite => {
             schema => [bool => default => 0],
