@@ -1,10 +1,5 @@
 package App::GenPericmdCompleterScript;
 
-# AUTHORITY
-# DATE
-# DIST
-# VERSION
-
 use 5.010001;
 use strict;
 use warnings;
@@ -13,6 +8,12 @@ use Log::ger;
 use Data::Dmp;
 
 use Exporter qw(import);
+
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 our @EXPORT_OK = qw(gen_pericmd_completer_script);
 
 our %SPEC;
@@ -267,8 +268,6 @@ sub gen_pericmd_completer_script {
                 "# NO_PERINCI_CMDLINE_SCRIPT\n",
                 "# PERINCI_CMDLINE_COMPLETER_SCRIPT: ", dmp(\%args), "\n",
                 "# FRAGMENT id=shcompgen-hint completer=1 for=$args{program_name}\n",
-                "# DATE\n",
-                "# VERSION\n",
                 "# PODNAME: _$args{program_name}\n",
                 "# ABSTRACT: Completer script for $args{program_name}\n",
                 "\n",
@@ -281,6 +280,11 @@ sub gen_pericmd_completer_script {
             "use strict;\n",
             "use warnings;\n",
             "\n",
+
+            "# AUTHORITY\n",
+            "# DATE\n",
+            "# DIST\n",
+            "# VERSION\n",
 
             'die "Please run this script under shell completion\n" unless $ENV{COMP_LINE} || $ENV{COMMAND_LINE};', "\n\n",
 
@@ -376,7 +380,7 @@ sub gen_pericmd_completer_script {
             '            }', "\n",
             '', "\n",
             '            # otherwise let periscomp do its thing', "\n",
-            '            return undef;', "\n",
+            '            return undef; ## no critic: Subroutines::ProhibitExplicitReturnUndef', "\n",
             '        },', "\n",
             '    );', "\n",
             "}\n\n",
@@ -408,6 +412,7 @@ sub gen_pericmd_completer_script {
             overwrite      => 1,
             trace_method   => 'none',
             pack_method    => 'datapack',
+            code_after_shebang => "## no critic: TestingAndDebugging::RequireUseStrict\n", # currently datapack code does not use strict
         );
         if ($args{strip}) {
             $depakargs{stripper} = 1;
