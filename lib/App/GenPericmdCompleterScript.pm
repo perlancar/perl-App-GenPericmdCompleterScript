@@ -301,7 +301,7 @@ sub gen_pericmd_completer_script {
 
             'my $copts = ', dmp($cli->common_opts), ";\n\n",
 
-            'my $r = {};', "\n\n",
+            'my $r = {common_opts=>$copts};', "\n\n",
 
             "# get words\n",
             'my $shell;', "\n",
@@ -344,6 +344,10 @@ sub gen_pericmd_completer_script {
             '}', "\n\n",
             'if (defined($scn) && !$sc_metas->{$scn}) { undef $scn } # unknown subcommand name', "\n",
 
+            "# pass meta for Complete::Getopt::Long\n",
+            '$r->{meta} = defined($scn) ? $sc_metas->{$scn} : $meta;', "\n",
+            "\n",
+
             "# XXX read_env\n\n",
 
             "# complete with periscomp\n",
@@ -351,7 +355,7 @@ sub gen_pericmd_completer_script {
             "{\n",
             '    require Perinci::Sub::Complete;', "\n",
             '    $compres = Perinci::Sub::Complete::complete_cli_arg(', "\n",
-            '        meta => defined($scn) ? $sc_metas->{$scn} : $meta,', "\n",
+            '        meta => $r->{meta},', "\n",
             '        words => $words,', "\n",
             '        cword => $cword,', "\n",
             '        common_opts => $copts,', "\n",
